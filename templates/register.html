@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - Create Account</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="split-container">
+        
+        <!-- LEFT SIDE: AI SCANNER DETAILS -->
+        <div class="split-left">
+            <div class="split-left-glow"></div>
+            
+            <div class="brand-header">
+                <span>🧠</span> MoodAI
+            </div>
+            
+            <div class="artwork-container">
+                <!-- Glowing scanner SVG details -->
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#7C3AED" />
+                            <stop offset="100%" stop-color="#06B6D4" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="40" y="40" width="120" height="120" rx="15" fill="none" stroke="url(#cyberGrad)" stroke-width="1.5" />
+                    <!-- Floating scanning dots -->
+                    <line x1="40" y1="100" x2="160" y2="100" stroke="#06B6D4" stroke-width="1.5" stroke-dasharray="5 5" />
+                    <line x1="100" y1="40" x2="100" y2="160" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="5 5" />
+                    <circle cx="100" cy="100" r="28" fill="none" stroke="#F8FAFC" stroke-width="2" />
+                    <!-- Corner focus lines -->
+                    <path d="M50 45 L45 45 L45 50" fill="none" stroke="#06B6D4" stroke-width="3" />
+                    <path d="M150 45 L155 45 L155 50" fill="none" stroke="#06B6D4" stroke-width="3" />
+                    <path d="M50 155 L45 155 L45 150" fill="none" stroke="#06B6D4" stroke-width="3" />
+                    <path d="M150 155 L155 155 L155 150" fill="none" stroke="#06B6D4" stroke-width="3" />
+                </svg>
+                
+                <div class="artwork-title">Initialize AI Profile.</div>
+                <p class="artwork-desc">Set up your credentials to sync mood analytics across multiple devices and receive personalized audio recommendations.</p>
+            </div>
+            
+            <div class="split-left-footer">
+                &copy; 2026 MoodAI SaaS, Inc. All rights reserved.
+            </div>
+        </div>
+        
+        <!-- RIGHT SIDE: REGISTER BOX -->
+        <div class="split-right">
+            <div class="auth-card">
+                <h2>Create Account</h2>
+                <p>Register to unlock real-time mood-to-music indexing.</p>
+                
+                <form method="POST">
+                    <!-- Visual-only Email input (ignored by app.py but provides premium look) -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="auth-input" placeholder="you@example.com" autocomplete="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="auth-input" placeholder="Create username" required autocomplete="username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="auth-input" placeholder="Create password" required autocomplete="new-password">
+                        <div class="password-strength-meter">
+                            <div class="password-strength-bar" id="strengthBar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Visual-only Confirm Password input (ignored by app.py) -->
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" class="auth-input" placeholder="Confirm password" autocomplete="new-password">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary auth-submit-btn">
+                        Initialize Profile
+                    </button>
+                </form>
+                
+                <div class="divider">or continue with</div>
+                
+                <div class="oauth-group">
+                    <button class="oauth-btn" type="button">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12.24 10.285V13.4h6.887C18.2 15.614 15.645 18 12.24 18c-3.86 0-7-3.14-7-7s3.14-7 7-7c1.7 0 3.25.61 4.46 1.64l2.384-2.383C17.307 1.837 14.942 1 12.24 1c-5.523 0-10 4.477-10 10s4.477 10 10 10c5.782 0 9.61-4.062 9.61-9.78 0-.66-.06-1.29-.17-1.935H12.24z"/>
+                        </svg>
+                        Google
+                    </button>
+                    <button class="oauth-btn" type="button">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                        GitHub
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="/login">Login</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Live Client-Side Password Strength Estimator Script -->
+    <script>
+        const passwordInput = document.getElementById('password');
+        const strengthBar = document.getElementById('strengthBar');
+
+        passwordInput.addEventListener('input', function() {
+            const value = passwordInput.value;
+            let strength = 0;
+
+            if (value.length > 5) strength += 25;
+            if (/[A-Z]/.test(value)) strength += 25;
+            if (/[0-9]/.test(value)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(value)) strength += 25;
+
+            strengthBar.style.width = strength + '%';
+            
+            // Color coding strength
+            if (strength <= 25) {
+                strengthBar.style.backgroundColor = '#ef4444'; // Red
+            } else if (strength <= 75) {
+                strengthBar.style.backgroundColor = '#f59e0b'; // Amber
+            } else {
+                strengthBar.style.backgroundColor = '#10b981'; // Emerald
+            }
+        });
+    </script>
+
+</body>
+</html>

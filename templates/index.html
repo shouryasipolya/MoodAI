@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- FLOATING TRANSPARENT NAVBAR -->
+        <nav class="navbar">
+            <a href="/" class="nav-brand">
+                <span>🧠</span> MoodAI
+            </a>
+            
+            <div class="nav-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" placeholder="Search music, moods, history...">
+            </div>
+            
+            <div class="nav-right">
+                <div class="nav-btn-icon" title="Notifications">
+                    🔔
+                </div>
+                <a href="/settings" class="nav-btn-icon" title="Settings">
+                    ⚙️
+                </a>
+                <a href="/settings" class="nav-profile">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Avatar">
+                    <span>{{ username }}</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- LARGE HERO -->
+        <section class="dashboard-hero">
+            <div class="hero-left">
+                <h1>AI that understands your emotions.</h1>
+                <p>Map your expressions in real time using DeepFace telemetry and instantly generate custom Spotify ambient feeds tailored to your emotional state.</p>
+                <div class="hero-ctas">
+                    <button class="btn btn-primary" onclick="openCameraPage()">
+                        ⚡ Start Scanner
+                    </button>
+                    <a href="/analytics" class="btn btn-secondary">
+                        📊 View Analytics
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-right-visual">
+                <!-- Premium Abstract AI Face SVG Artwork -->
+                <svg class="hero-artwork" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="artGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.3" />
+                            <stop offset="100%" stop-color="#050816" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="90" fill="url(#artGlow)" />
+                    <!-- Node structure of face -->
+                    <circle cx="70" cy="80" r="5" fill="#06B6D4" />
+                    <circle cx="130" cy="80" r="5" fill="#06B6D4" />
+                    <circle cx="100" cy="110" r="4" fill="#7C3AED" />
+                    <path d="M70 140 Q100 160 130 140" fill="none" stroke="#9333EA" stroke-width="3" stroke-linecap="round" />
+                    <!-- Abstract geometric links -->
+                    <line x1="70" y1="80" x2="100" y2="110" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                    <line x1="130" y1="80" x2="100" y2="110" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                    <line x1="70" y1="80" x2="130" y2="80" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                    <line x1="70" y1="80" x2="70" y2="140" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                    <line x1="130" y1="80" x2="130" y2="140" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- STATISTICS CARDS -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">🔮</div>
+                <div class="stat-info">
+                    <span>Current Mood</span>
+                    <h3>Idle</h3>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-info">
+                    <span>AI Accuracy</span>
+                    <h3>98.2%</h3>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🔄</div>
+                <div class="stat-info">
+                    <span>Sessions</span>
+                    <h3>24 Scans</h3>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎵</div>
+                <div class="stat-info">
+                    <span>Curation</span>
+                    <h3>16 Tracks</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- LARGE LIVE CAMERA SECTION (PRE-START) -->
+        <section class="camera-preview-section">
+            <h2>🎥 Live AI Camera Console</h2>
+            
+            <div class="console-viewport" id="cameraStartScreen">
+                <svg class="console-visual" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                    <rect x="15" y="15" width="70" height="70" rx="10" stroke="#06B6D4" stroke-width="2" />
+                    <circle cx="50" cy="50" r="15" stroke="#7C3AED" stroke-width="2" />
+                    <path d="M25 25 L35 25 M25 25 L25 35" stroke="#06B6D4" stroke-width="3" />
+                    <path d="M75 25 L65 25 M75 25 L75 35" stroke="#06B6D4" stroke-width="3" />
+                    <path d="M25 75 L35 75 M25 75 L25 65" stroke="#06B6D4" stroke-width="3" />
+                    <path d="M75 75 L65 75 M75 75 L75 65" stroke="#06B6D4" stroke-width="3" />
+                </svg>
+                <h3>Scanner Standby</h3>
+                <p>Engage the camera to begin analyzing your facial geometry and trigger active audio curation.</p>
+                <button class="btn btn-primary" onclick="openCameraPage()">
+                    ⚡ Initialize Scanner
+                </button>
+            </div>
+        </section>
+
+        <!-- RECENT MOOD HISTORY -->
+        <section class="history-section">
+            <h2>📜 Recent Mood History</h2>
+            <div class="timeline-grid">
+                
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-time">10 mins ago</span>
+                        <span class="timeline-mood-tag happy">Happy</span>
+                    </div>
+                    <div class="timeline-detail">
+                        <span>Confidence Level</span>
+                        <strong>94.0%</strong>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-time">1 hour ago</span>
+                        <span class="timeline-mood-tag neutral">Neutral</span>
+                    </div>
+                    <div class="timeline-detail">
+                        <span>Confidence Level</span>
+                        <strong>88.5%</strong>
+                    </div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-time">Yesterday</span>
+                        <span class="timeline-mood-tag sad">Sad</span>
+                    </div>
+                    <div class="timeline-detail">
+                        <span>Confidence Level</span>
+                        <strong>76.4%</strong>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PREMIUM FEATURES SECTION -->
+        <section class="features-section">
+            <h2>✨ AI Capabilities</h2>
+            <div class="features-grid">
+                
+                <div class="feature-box-v2">
+                    <div class="icon-wrap">🧠</div>
+                    <h3>Telemetry Mapping</h3>
+                    <p>DeepFace meshes your facial geometry across 68 tracking vertices to compute real-time micro-emotions.</p>
+                </div>
+
+                <div class="feature-box-v2">
+                    <div class="icon-wrap">🎵</div>
+                    <h3>Spotify Linking</h3>
+                    <p>Matches emotional results to curated embeds automatically, keeping sound profiles tailored to your mood.</p>
+                </div>
+
+                <div class="feature-box-v2">
+                    <div class="icon-wrap">📊</div>
+                    <h3>Analytics Timeline</h3>
+                    <p>Reviews logs in a historical database, compiling summaries and charts of your mood trends over time.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- SCANNER SCRIPT -->
+    <script>
+        let started = false;
+        function openCameraPage(){
+            window.location.href='/camera';
+        }
+        function detectMood(){
+            window.location.href = '/detect';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - System Settings</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="settings-container">
+        
+        <!-- FLOATING NAVBAR -->
+        <nav class="navbar">
+            <a href="/" class="nav-brand">
+                <span>🧠</span> MoodAI
+            </a>
+            
+            <div class="nav-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: rgba(255,255,255,0.4);">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" placeholder="Search settings configurations...">
+            </div>
+            
+            <div class="nav-right">
+                <a href="/logout" class="btn btn-secondary">🚪 Logout</a>
+            </div>
+        </nav>
+
+        <!-- SETTINGS SPLIT GRID -->
+        <div class="settings-grid">
+            
+            <!-- LEFT CATEGORY TABS -->
+            <aside class="settings-nav">
+                <a href="#appearance" class="settings-nav-item active" onclick="switchTab(this)">
+                    🎨 Appearance
+                </a>
+                <a href="#notifications" class="settings-nav-item" onclick="switchTab(this)">
+                    🔔 Notifications
+                </a>
+                <a href="#camera" class="settings-nav-item" onclick="switchTab(this)">
+                    🎥 Camera Settings
+                </a>
+                <a href="#spotify" class="settings-nav-item" onclick="switchTab(this)">
+                    🎶 Spotify API Link
+                </a>
+                <a href="#privacy" class="settings-nav-item" onclick="switchTab(this)">
+                    🔒 Security & Privacy
+                </a>
+                <a href="#profile" class="settings-nav-item" onclick="switchTab(this)">
+                    👤 User Profile
+                </a>
+            </aside>
+
+            <!-- RIGHT SYSTEM PANEL CARDS -->
+            <form method="POST">
+<main>
+                
+                <!-- APPEARANCE PANEL -->
+                <div class="settings-card" id="panel-appearance">
+                    <h3>Appearance Settings</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Ultra Dark Theme</h4>
+                            <p>Enable neon dark mode optimized for premium OLED screens.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="dark_theme" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Dynamic Ambient Glows</h4>
+                            <p>Enable moving background vector blur circles.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="ambient_glow" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- NOTIFICATIONS PANEL -->
+                <div class="settings-card" id="panel-notifications" style="display:none;">
+                    <h3>Notification Center</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Diagnostic Alerts</h4>
+                            <p>Receive telemetry scanner optimization recommendations.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="notifications">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CAMERA PANEL -->
+                <div class="settings-card" id="panel-camera" style="display:none;">
+                    <h3>Camera Telemetry</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Live Scan Overlay</h4>
+                            <p>Draw scanning box overlays and mesh points on video capture streams.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="live_overlay" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Mirror Feed View</h4>
+                            <p>Flip camera horizontally on live capture console.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="mirror_feed" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SPOTIFY PANEL -->
+                <div class="settings-card" id="panel-spotify" style="display:none;">
+                    <h3>Spotify Integration</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Auto-Queue Recommended Playlists</h4>
+                            <p>Instantly feed song recommendations to active browser frames.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="spotify_auto" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- PRIVACY PANEL -->
+                <div class="settings-card" id="panel-privacy" style="display:none;">
+                    <h3>Privacy & Logging Policies</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Keep Historical logs</h4>
+                            <p>Write mood detection variables to local MySQL instance database logs.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="history_logs" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- PROFILE PANEL -->
+                <div class="settings-card" id="panel-profile" style="display:none;">
+                    <h3>Account Profile</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-text">
+                            <h4>Dual-Factor Verification</h4>
+                            <p>Secure login checks using linked SSH credentials.</p>
+                        </div>
+                        <label class="switch-control">
+                            <input type="checkbox" name="two_factor">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <a href="/" class="btn btn-secondary">⬅ Dashboard</a>
+                </div>
+            </main>
+            <button
+type="submit"
+class="btn btn-primary"
+style="margin-top:20px;">
+💾 Save Settings
+</button>
+
+</form>
+
+        </div>
+
+    </div>
+
+    <!-- TAB TOGGLE SCRIPT -->
+    <script>
+        function switchTab(element) {
+            // Remove active classes
+            document.querySelectorAll(".settings-nav-item").forEach(item => {
+                item.classList.remove("active");
+            });
+            // Add active class
+            element.classList.add("active");
+
+            // Hide all panels
+            const targetPanelId = "panel-" + element.getAttribute("href").substring(1);
+            document.querySelectorAll(".settings-card").forEach(card => {
+                card.style.display = "none";
+            });
+
+            // Show selected panel
+            document.getElementById(targetPanelId).style.display = "block";
+        }
+    </script>
+
+</body>
+</html>

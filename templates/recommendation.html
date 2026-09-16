@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - Recommendations</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="spotify-dashboard-container">
+        
+        <!-- MAIN SPOTIFY-LIKE CONTAINER -->
+        <div class="spotify-layout">
+            
+            <!-- HEADER SEARCH & FILTERS -->
+            <div class="spotify-header">
+                <h1>🎶 Recommended Tracks</h1>
+                
+                <div class="nav-search" style="position: relative;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: rgba(255,255,255,0.4);">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="trackSearch" placeholder="Search playlist..." onkeyup="searchTracks()">
+                </div>
+            </div>
+
+            <!-- CATEGORY CHIPS -->
+            <div class="filter-bar" style="margin-bottom: 30px;">
+                <span class="filter-pill active" onclick="filterGenre('all', this)">All Moods</span>
+                <span class="filter-pill" onclick="filterGenre('happy', this)">High Energy</span>
+                <span class="filter-pill" onclick="filterGenre('sad', this)">Calming Acoustic</span>
+                <span class="filter-pill" onclick="filterGenre('angry', this)">Binaural ambient</span>
+                <span class="filter-pill" onclick="filterGenre('surprise', this)">Synthesizer</span>
+            </div>
+
+            <!-- DYNAMIC Spotify LIST GRID -->
+            <div class="spotify-tracks-grid" id="tracksGrid">
+                {% if songs %}
+                    {% for song in songs %}
+                        <div class="spotify-song-card" data-title="{{ song.name }}" data-artist="{{ song.artist }}">
+                            <!-- Album placeholder with gradient & hover play toggle -->
+                            <div class="song-art-container">
+                                💿
+                                <div class="play-hover-btn">▶</div>
+                            </div>
+                            
+                            <h4>{{ song.name }}</h4>
+                            <p>{{ song.artist }}</p>
+                            
+                            <div class="track-embed-wrapper" style="margin-bottom: 15px;">
+                                <iframe 
+                                    src="{{ song.embed }}" 
+                                    allowtransparency="true" 
+                                    allow="encrypted-media"
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                            
+                            <div class="song-card-footer">
+                                <span>3:45</span>
+                                <button class="btn-like" onclick="toggleLike(this)">🤍</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Placeholder in case no playlist history is stored -->
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; border: 1px dashed var(--color-glass-border); border-radius: 20px;">
+                        <span style="font-size: 48px; display: block; margin-bottom: 15px;">💤</span>
+                        <h3>No Tracks Generated Yet</h3>
+                        <p style="color: var(--color-gray); margin-bottom: 25px;">Activate the scanner to map your expressions and build audio playlists.</p>
+                        <a href="/camera" class="btn btn-primary">⚡ Start Scanner</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div style="margin-top: 40px; display: flex; gap: 15px;">
+                <a href="/" class="btn btn-secondary">⬅ Dashboard</a>
+                <a href="/camera" class="btn btn-primary">⚡ Scan Again</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SPOTIFY INTERACTIVE ACTIONS SCRIPT -->
+    <script>
+        function toggleLike(btn) {
+            if (btn.innerText === "🤍") {
+                btn.innerText = "❤️";
+                btn.style.color = "#ef4444";
+            } else {
+                btn.innerText = "🤍";
+                btn.style.color = "rgba(255,255,255,0.3)";
+            }
+        }
+
+        // Live Javascript Search Filtering
+        function searchTracks() {
+            const query = document.getElementById("trackSearch").value.toLowerCase();
+            const cards = document.querySelectorAll(".spotify-song-card");
+            
+            cards.forEach(card => {
+                const title = card.getAttribute("data-title").toLowerCase();
+                const artist = card.getAttribute("data-artist").toLowerCase();
+                if (title.includes(query) || artist.includes(query)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Genre filter toggles
+        function filterGenre(genre, element) {
+            document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+            element.classList.add("active");
+            
+            // In a mock implementation, we could simulate genre matches
+            const cards = document.querySelectorAll(".spotify-song-card");
+            cards.forEach(card => {
+                card.style.display = "flex";
+            });
+        }
+    </script>
+
+</body>
+</html>

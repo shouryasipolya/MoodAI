@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - Assessment Results</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="result-page-container">
+        
+        <!-- ASSESSMENT CARD -->
+        <div class="result-main-card">
+            <div class="result-header-block">
+                <div class="result-emoji-glow">
+                    {{ emoji }}
+                </div>
+                <h1>Empathic signature mapped</h1>
+                <h2>{{ mood }}</h2>
+                
+                <!-- SVG circular confidence ring -->
+                <div class="confidence-ring-box">
+                    <svg class="confidence-ring-circle" width="160" height="160">
+                        <circle stroke="rgba(255, 255, 255, 0.05)" stroke-width="8" fill="transparent" r="70" cx="80" cy="80"/>
+                        <circle id="progressCircle" stroke="var(--color-accent)" stroke-width="8" stroke-dasharray="440" stroke-dashoffset="440" fill="transparent" r="70" cx="80" cy="80" stroke-linecap="round"/>
+                    </svg>
+                    <div class="confidence-ring-label">
+                        <span>{{ confidence }}%</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic AI explanation text box -->
+                <div class="result-explanation" id="moodExplanation">
+                    Analyzing neural micro-features...
+                </div>
+            </div>
+
+            <!-- CURATED MUSIC TRACKS -->
+            <div class="result-playlist-section">
+                <h3>🎵 Curated Auditory Playlist</h3>
+                <div class="music-grid-v2">
+                    {% for song in songs %}
+                        <div class="track-card-premium">
+                            <div class="track-card-header">
+                                <div class="track-mock-art">🎶</div>
+                                <div class="track-card-info">
+                                    <h4>{{ song.name }}</h4>
+                                    <p>{{ song.artist }}</p>
+                                </div>
+                            </div>
+                            <div class="track-embed-wrapper">
+                                <iframe 
+                                    src="{{ song.embed }}" 
+                                    allowtransparency="true" 
+                                    allow="encrypted-media"
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="center">
+                <a href="/" class="btn btn-secondary">
+                    ⬅ Return to Dashboard
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Telemetry Ring Animation & AI Explanation Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Circle animation
+            const confidence = parseFloat("{{ confidence }}") || 0;
+            const circle = document.getElementById("progressCircle");
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            const offset = circumference - (confidence / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+
+            // Dynamic Explanation
+            const explanations = {
+                happy: "Our neural model has mapped elevated zygomatic curvatures and open eye contours. Your profile indicates high dopamine activity—enjoy upbeat tempos.",
+                sad: "Telemetry suggests relaxed facial muscles and downward mouth mapping. Your profile indicates low-frequency energy—calming acoustic beats will help center you.",
+                angry: "Scan indicates tense brow contours and pressed lip boundaries. Low-BPM calming frequency models are recommended to encourage heart-rate recovery.",
+                surprise: "Widened eye boundaries and open jaw indexes point to high-attention surprise states. Energetic synthesizer sequences match this cognitive transition.",
+                neutral: "Expression vectors indicate standard baseline equilibrium. Queuing clean ambient acoustics designed for focus and productivity."
+            };
+            
+            const mood = "{{ mood }}".toLowerCase();
+            document.getElementById("moodExplanation").innerText = explanations[mood] || explanations.neutral;
+        });
+    </script>
+
+</body>
+</html>

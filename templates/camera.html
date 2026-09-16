@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodAI - Live HUD Scanner</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="camera-hud-container">
+        
+        <!-- LIVE CAMERA STREAM FEED -->
+        <img class="hud-camera-feed" id="liveFeed" src="/video" alt="Live Scanner Feed">
+
+        <!-- ANIMATED HUD SCANNER LINE -->
+        <div class="hud-laser-line"></div>
+
+        <!-- CYBERPUNK HUD OVERLAYS -->
+        <div class="hud-overlay">
+            
+            <!-- TOP BAR PANELS -->
+            <div class="hud-top-bar">
+                <div class="hud-status-box">
+                    <span class="live-blink"></span> LIVE SCANNER
+                </div>
+                
+                <div class="hud-readouts">
+                    <div class="hud-pill">
+                        <span>Capture Rate</span>
+                        <strong>30 FPS</strong>
+                    </div>
+                    <div class="hud-pill">
+                        <span>Confidence</span>
+                        <strong>98.2%</strong>
+                    </div>
+                    <div class="hud-pill active-indicator">
+                        <span>Face Detected</span>
+                        <strong>TRUE</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CENTRAL CORNER CROSSHAIR -->
+            <div class="hud-crosshair"></div>
+
+            <!-- BOTTOM PANEL CONTROLS -->
+            <div class="hud-controls-panel">
+                <button class="btn btn-primary" onclick="detectMood()">
+                    🧠 Analyze Expression
+                </button>
+                <button class="btn btn-danger" onclick="stopCamera()">
+                    🛑 Abort Scanner
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONTROL TELEMETRY SCRIPT -->
+    <script>
+        fetch('/start_camera');
+
+        function detectMood(){
+            window.location.href='/detect';
+        }
+
+        function stopCamera(){
+            fetch('/stop_camera')
+                .then(response => response.text())
+                .then(data => {
+                    window.location.href='/';
+                });
+        }
+    </script>
+
+</body>
+</html>
