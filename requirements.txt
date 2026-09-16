@@ -1,0 +1,7 @@
+﻿Flask
+gunicorn
+tensorflow
+opencv-python-headless
+numpy
+mysql-connector-python
+requests
